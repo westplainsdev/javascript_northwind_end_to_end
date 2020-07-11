@@ -1,0 +1,74 @@
+<style>
+    .ui-show {
+        /* transition: all 0.5s ease; /* You should probably browser-prefix this */
+        */ padding: 0;
+    }
+
+    .ui-hide {
+        opacity: 0;
+        padding: 0;
+        /* transition: all 0.5s ease; /* You should probably browser-prefix this */
+        */
+    }
+
+    .clickable {cursor: pointer;}
+    .angular-google-map-container { height: 600px; }
+</style>
+
+<h3 ng-bind="message"></h3>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <p>Enter your city & state/province or ZIP/postal code to find a
+            Hallmark Gold Crown store near you in the U.S. or Canada.
+            Products and prices may vary by store.</p>
+
+        <p>
+            <input type="text" ng-model="query" ui-keypress="{13:'keypressCallback($event)'}" placeholder="Ex: 64108"/>
+        </p>
+
+        <div ng-repeat="store in storeCollection" style="min-height: 120px; border-top: solid 1px #666666" class="row">
+
+            <div class="col-sm-3 text-center clickable" ng-click="openInfoWindow(store)">
+               <h3 ng-bind="$index + 1"></h3>
+                {{store.distance | shortRange}}<br />
+                MILES
+
+            </div>
+            <div class="col-sm-9">
+                <div ng-click="openInfoWindow(store)" class="clickable">
+                    <strong><span ng-bind="store.name"></span></strong><br/>
+                    <span ng-bind="store.address1"></span><br/>
+                    <span ng-bind-template="{{store.city}}, {{store.stateCode}} {{store.postalCode}}"></span><br/>
+                </div>
+                <a href="">Directions</a><br/>
+                <span ng-bind="store.phone"></span>
+
+            <span ng-hide="!store.storeHours.length">
+            <p ui-hide="showHide"><a ng-click="showHide=!showHide" ng-href="#"> Show additional information</a></p>
+            <p ui-hide="!showHide" style="position: relative; top: -28px;"><a ng-click="showHide=!showHide" ng-href="#">Hide
+                additional information</a></p>
+            </span>
+
+                <div collapse="!showHide" style="position: relative; top: -28px; padding-bottom: 0; margin-bottom: 0;">
+                    <span ng-bind-html="store.storeHours"></span></div>
+
+            </div>
+        </div>
+<span ng-hide="!storeCollection">
+        <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" ng-change="pageChanged()"></pagination>
+</span>
+    </div>
+    <div class="col-md-8">
+
+        <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+            <ui-gmap-markers models="map.storeMarkers" coords="'self'" icon="'icon'" click="'onClick'">
+                <ui-gmap-windows show="show" click="'onClick'">
+                    <div ng-non-bindable>{{title}}</div>
+                </ui-gmap-windows>
+            </ui-gmap-markers>
+        </ui-gmap-google-map>
+
+    </div>
+</div>

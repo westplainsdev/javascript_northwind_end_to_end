@@ -1,0 +1,60 @@
+<h4 ng-bind-template="Details for customer: {{customer.CompanyName}} - Short Code: {{customer.CustomerID}}"></h4>
+<span ng-bind-template="{{customer.ContactName}}, {{customer.ContactTitle}}"></span><br/>
+<address>
+    <span ng-bind="customer.Address"></span>
+    <span ng-bind="customer.City"></span>
+    <span ng-bind="customer.Region"></span>
+    <span ng-bind="customer.PostalCode"></span>
+    <br/>
+    <span ng-bind="customer.Country"></span>
+</address>
+
+
+<span ng-bind-template="Phone: {{customer.Phone}}"></span> <br/>
+<span ng-bind-template="Fax: {{customer.Fax}}"></span>
+
+<hr/>
+<p>
+    <a ui-sref="form({id: customer.CustomerID, type: 'edit'})" class="btn btn-primary"><i class="fa fa-pencil"></i>&nbsp;Edit Customer</a>
+    <button ng-click="removeCustomer()" class="btn btn-danger pull-right"  ng-disabled="removeActive"><i class="fa fa-trash"></i>&nbsp;Remove Customer</button>
+
+
+</p>
+
+<div ng-show="ordersLoaded">
+    <hr/>
+    <h4>Order History</h4>
+    <table class="table table-condensed table-bordered table-hover">
+        <thead>
+        <tr class="active">
+            <th>Order ID</th>
+            <th>Sales Rep</th>
+            <th>Order Date</th>
+            <th>Shipped Date</th>
+            <th>Freight</th>
+            <th>Ship Name</th>
+            <th>Ship Address</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="order in ordersCollection">
+            <td><a href="" ng-click="selectAndGo(order)">{{order.OrderID}}</a></td>
+            <td ng-bind="order.SalesRep"></td>
+            <td ng-bind="order.OrderDate | date"></td>
+            <td ng-bind="order.ShippedDate | date"></td>
+            <td ng-bind="order.Freight"></td>
+            <td ng-bind="order.ShippersName"></td>
+            <td>
+                <small>
+                    <span ng-bind="order.ShipAddress"></span><br/>
+                    <span ng-bind="order.ShipCity"></span>
+                    <span ng-bind="order.ShipRegion"></span>
+                    <span ng-bind="order.ShipPostalCode"></span><br/>
+                    <span ng-bind="order.ShipCountry"></span>
+                </small>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>

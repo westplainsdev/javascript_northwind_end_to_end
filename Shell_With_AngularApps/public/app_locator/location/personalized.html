@@ -1,0 +1,43 @@
+<h3>Find personalized books near you</h3>
+<p>Visit a participating store to see sample books in person and order one of your own. Products may vary by store. </p>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <p>
+            <select ng-model="selectedState" ng-change="parseStores()">
+                <option ng-repeat="state in states" ng-disabled="state.toggleOff" value="{{state.key}}"
+                        ng-selected="{{state.value == selectedState}}">{{state.value}}
+                </option>
+            </select>
+        </p>
+        <p><a ng-href="http://{{url.stage}}/shop">Shop personalized books</a></p>
+
+        <p><a ng-href="http://{{url.stage}}/learn">Learn more about personalized gifts</a></p>
+    </div>
+    <div class="col-md-8" style="overflow: hidden;">
+        <div ng-class="fadeToggle ? 'fade-up' : 'fade-down'">
+
+            <div class="row row-break " ng-repeat="store in filterdStores">
+                <div class="col-md-4">
+                    <p>
+                        <strong> <span ng-bind="store.city"></span></strong><br/>
+                        <span ng-bind="store.name"></span>
+                    </p></div>
+                <div class="col-md-5">
+                    <p>
+                        <!-- /Store name and city tablet and mobile -->
+                        <span ng-bind="store.address1"></span><br/>
+                        <span ng-bind="store.address2"></span><br/>
+                        <span ng-bind-template="{{store.city}} {{store.state_code}}, {{store.postal_code}}"></span><br/>
+                        <a ng-href="{{store.mapUrl}}" target="_blank">Map</a>
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <p>
+                        <span itemprop="telephone" ng-bind="store.phone"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

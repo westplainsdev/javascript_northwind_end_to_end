@@ -1,0 +1,24 @@
+<h4>{{description}}</h4>
+
+<div ng-app="customerApp">
+
+    <ul class="nav nav-pills">
+        <li role="presentation" ui-sref-active="active"><a ui-sref="customers"><i class="fa fa-home"></i>&nbsp;Northwind Customers</a></li>
+        <li role="presentation" ui-sref-active="active"><a ui-sref="about">About</a></li>
+    </ul>
+
+    <hr/>
+    <div ui-view></div>
+
+</div>
+
+<script src="../vendor/angular/angular.js"></script>
+<script src="../vendor/angular/angular-ui-router.min.js"></script>
+<script src="../app_customers/app.js"></script>
+<script src="../app_customers/dataAccess/CustomerServices.js"></script>
+<script src="../app_customers/dataAccess/OrderService.js"></script>
+<script src="../app_customers/customer_list/listController.js"></script>
+<script src="../app_customers/customer_details/detailsController.js"></script>
+<script src="../app_customers/customer_invoice/invoiceController.js"></script>
+<script src="../app_customers/customer_form/formController.js"></script>
+<script src="../app_customers/services/persistService.js"></script>

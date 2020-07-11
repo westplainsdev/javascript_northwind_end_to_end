@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="invoice-title">
+                <h3> {{display.customer.CompanyName}} <span class="pull-right">Invoice for Order # <span
+                        ng-bind="display.orderInfo.OrderID"></span></span></h3>
+                <address>
+                    <span class="pull-right"> <strong>Order Date:</strong><br>
+                   {{display.orderInfo.ShippedDate | date}}<br><br></span>
+
+                    <span ng-bind="display.customer.Address"></span>
+                    <span ng-bind="display.customer.City"></span>
+                    <span ng-bind="display.customer.Region"></span>
+                    <span ng-bind="display.customer.PostalCode"></span>
+                    <br/>
+                    <span ng-bind="display.customer.Country"></span>
+                </address>
+            </div>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Order summary</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <thead>
+                            <tr>
+                                <td><strong>Product Name</strong></td>
+                                <td class="text-center"><strong>Unit Price</strong></td>
+                                <td class="text-center"><strong>Quantity</strong></td>
+                                <td class="text-right"><strong>Extended Price</strong></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                            <tr ng-repeat="item in display.orderItems">
+                                <td>
+                                    <span ng-bind="item.ProductName"></span><br/>
+                                    <small>
+                                        <span ng-bind="item.QuantityPerUnit"></span>
+                                    </small>
+                                </td>
+                                <td class="text-center" ng-bind="item.UnitPrice | currency"></td>
+                                <td class="text-center" ng-bind="item.Quantity"></td>
+                                <td class="text-right" ng-bind="item.ExtendedPrice | currency"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="thick-line"></td>
+                                <td class="thick-line"></td>
+                                <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                                <td class="thick-line text-right" ng-bind="display.subTotal | currency"></td>
+                            </tr>
+                            <tr>
+                                <td class="no-line"></td>
+                                <td class="no-line"></td>
+                                <td class="no-line text-center"><strong>Shipping</strong></td>
+                                <td class="no-line text-right">$0</td>
+                            </tr>
+                            <tr>
+                                <td class="no-line"></td>
+                                <td class="no-line"></td>
+                                <td class="no-line text-center"><strong>Total</strong></td>
+                                <td class="no-line text-right" ng-bind="display.total | currency"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a ui-sref="details({id: display.customer.CustomerID})" class="btn btn-default"><i class="fa fa-angle-double-left"></i>&nbsp;Back</a>
+    <button class="btn btn-primary"><i class="fa fa-print"></i>&nbsp;Print</button>
+</div>
