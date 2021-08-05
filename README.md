@@ -1,4 +1,12 @@
-# End to End Demo First Steps #
+# THIS PROJECT HAS BEEN ARCHIVED 
+Due to the large number of out of date node_modules and the ever increasing security threat that is presented by these modules
+we have decided to archive this project. Everything here has been made read only and we are no longer accepting pull requests, 
+bug fixes or enhancements. 
+
+
+<hr />
+
+## End to End Demo
 This demo contains two node.js applications and allows one to talk to a second one which connects to a Microsoft SQL server database. 
 
 ## Quick Start ##
